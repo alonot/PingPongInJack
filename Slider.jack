@@ -1,0 +1,50 @@
+class Slider {
+    field int x,y,len,wid;
+
+
+    constructor Slider new(int ax, int ay, int l, int w){
+        let x = ax;
+        let y = ay;
+        let len = l;
+        let wid = w;
+        do draw();
+        return this;
+
+    
+    }
+
+    method void draw(){
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x,y,x+wid,y+len);
+        return;
+    }
+
+    
+    method void moveup(){
+        if (y>17){
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x,(y+len)-2,x+wid,y+len);
+            let y = y-2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x,y,x+wid,y+len);
+        }
+        return;
+    }
+
+    method void movedown(){
+        if ((y+len)<238){
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x,y,x+wid,y+2);
+            let y = y+2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x,y,x+wid,y+len);
+        }
+        return;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+}

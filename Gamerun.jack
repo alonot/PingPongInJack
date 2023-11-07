@@ -1,11 +1,13 @@
 class Gamerun {
     field Slider s1,s2;
+    field Ball ball;
     field int direction1,direction2;
 
     constructor Gamerun new(){
         do Gui();
         let s1 = Slider.new(22,95,65,10);
         let s2 = Slider.new(479,95,65,10);
+        let ball= Ball.new(127,127,5);
         let directio1 = 0;
         let direction2 =0;
         
@@ -34,6 +36,18 @@ class Gamerun {
         let result = ball.move(direction,a,b);
         do a.dispose();
         do b.dispose();
+        return;
+    }
+
+    method void ai(){
+        var int dir;
+        let dir = ball.getDirection()
+        if (dir > 0){
+            s2.moveup();
+        }
+        if (dir<0){
+            s2.movedown();
+        }
     }
 
 
@@ -52,6 +66,7 @@ class Gamerun {
         return ;
     }
 
+
     method void run(){
         var char key;
         var boolean exit;
@@ -61,6 +76,7 @@ class Gamerun {
             while(key = 0){
                 let key = Keyboard.keyPressed();
                 do moveslider2();
+                do ai();
             }
             if (key = 81)  { let exit = true; } 
             if (key = 131) { let direction = 1; }  

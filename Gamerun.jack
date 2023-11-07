@@ -27,7 +27,13 @@ class Gamerun {
     }
 
     method int moveBall(){
-        
+        var Array a,b;
+        var int result;
+        let a = slider1.ycordinate();
+        let b = slider2.ycordinate();
+        let result = ball.move(direction,a,b);
+        do a.dispose();
+        do b.dispose();
     }
 
 
@@ -43,7 +49,7 @@ class Gamerun {
         if (direction = 1){do s2.moveup();}
         if (direction = 2){do s2.movedown();}
         do Sys.wait(5);
-        return ;                                                                                                                                    
+        return ;
     }
 
     method void run(){
@@ -55,7 +61,6 @@ class Gamerun {
             while(key = 0){
                 let key = Keyboard.keyPressed();
                 do moveslider2();
-
             }
             if (key = 81)  { let exit = true; } 
             if (key = 131) { let direction = 1; }  

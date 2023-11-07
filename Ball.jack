@@ -33,7 +33,7 @@ class Ball{
         return;
     }
 
-    method int move(int ad,int bd,Array ay,Array by){
+    method int move(int ad,Array ay,Array by){
         var int flag;
         var boolean pos,posx;
         let flag=0;
@@ -89,14 +89,13 @@ class Ball{
             }
         }
         if(flag = 1){
-            let direction[1]=direction[1]+2;
-            if(bd > 0){
-                let direction[1]=direction[1]-1;
+            if(direction[1] > 0){
+                let direction[1]=direction[1]+1;
                 let direction[0]=direction[0]+1;
                 
             }
-            if(bd<0){
-                let direction[1]=direction[1]-3;
+            if(direction[1]<0){
+                let direction[1]=direction[1]-1;
                 let direction[0]=direction[1]-1;
             }
         }

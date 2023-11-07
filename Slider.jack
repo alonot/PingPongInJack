@@ -9,8 +9,6 @@ class Slider {
         let wid = w;
         do draw();
         return this;
-
-    
     }
 
     method void draw(){

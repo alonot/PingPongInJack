@@ -27,9 +27,6 @@ class Slider {
 
     }
 
-    method void gety(){
-        return y;
-    }
     method void moveup(){
         if (y>17){
             do Screen.setColor(false);

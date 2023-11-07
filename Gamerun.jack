@@ -1,15 +1,14 @@
 class Gamerun {
-    field Slider s1,s2;
+    field Slider slider1,slider2;
     field Ball ball;
-    field int direction1,direction2;
+    field int direction;
 
     constructor Gamerun new(){
         do Gui();
-        let s1 = Slider.new(22,95,65,10);
-        let s2 = Slider.new(479,95,65,10);
+        let slider1 = Slider.new(22,95,65,10);
+        let slider2 = Slider.new(479,95,65,10);
         let ball= Ball.new(127,127,5);
-        let directio1 = 0;
-        let direction2 =0;
+        let direction = 0;
         
         return this;
     }
@@ -36,32 +35,33 @@ class Gamerun {
         let result = ball.move(direction,a,b);
         do a.dispose();
         do b.dispose();
-        return;
+        return result;
     }
 
     method void ai(){
         var int dir;
-        let dir = ball.getDirection()
+        let dir = ball.getDirection();
         if (dir > 0){
-            s2.moveup();
+            do slider1.moveup();
         }
         if (dir<0){
-            s2.movedown();
+            do slider1.movedown();
         }
+        return;
     }
 
 
     method void dispose(){
-        do s1.dispose();
-        do s2.dispose();
+        do slider1.dispose();
+        do slider2.dispose();
         return;
     }
 
    
 
     method void moveslider2(){
-        if (direction = 1){do s2.moveup();}
-        if (direction = 2){do s2.movedown();}
+        if (direction = 1){do slider2.moveup();}
+        if (direction = 2){do slider2.movedown();}
         do Sys.wait(5);
         return ;
     }
@@ -69,6 +69,7 @@ class Gamerun {
 
     method void run(){
         var char key;
+        var int result;
         var boolean exit;
         let exit = false;
 
@@ -77,16 +78,13 @@ class Gamerun {
                 let key = Keyboard.keyPressed();
                 do moveslider2();
                 do ai();
+                let result= moveBall();
+
             }
             if (key = 81)  { let exit = true; } 
             if (key = 131) { let direction = 1; }  
             if (key = 133) { let direction = 2; }  
-
-            while (~(key = 0)) {
-            let key = Keyboard.keyPressed();
-            do moveslider2();
-
-            }
+            let key=0;
         
          }
          return;

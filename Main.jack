@@ -1,7 +1,7 @@
 class Main {
     function void main() {
-        var Game game;
-        let game = Game.new();
+        var Gamerun game;
+        let game = Gamerun.new();
         do game.run();
         do game.dispose();
         return;

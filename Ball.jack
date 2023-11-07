@@ -52,13 +52,13 @@ class Ball{
 
         // If ball is out from left side:
         if( x < (22+radius)){
-           // if(((y-radius)<ay[1]) & ((y+radius)>ay[0])){
+           if(((y-radius)<ay[1]) & ((y+radius)>ay[0])){
                 let direction[0]=0-direction[0];
                 let flag =1;
-           // }
-            //else{
-              //  return -1;
-            //}
+           }
+            else{
+              return -1;
+            }
         }
 
         // If ball is out from right side:
@@ -134,8 +134,8 @@ class Ball{
         let y=y+direction[1];
         do Screen.setColor(true);
         do Screen.drawCircle(x,y,radius);
-        //do ay.dispose();
-        //do by.dispose();
+        do ay.dispose();
+        do by.dispose();
         return 0;
     }
 }

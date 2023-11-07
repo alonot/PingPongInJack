@@ -1,0 +1,138 @@
+class Ball{
+    field int x,y,radius;
+    field Array direction;
+
+    constructor Ball new(int Ax,int Ay,int r){
+        let x=Ax;
+        let y= Ay;
+        let radius=r;
+        let direction=Array.new(2);
+        let direction[0] = 2;
+        let direction[1] = 2;
+        do draw();
+        return this;
+    }
+    method int getDirection(){
+        if(x<300){
+        return direction[1];
+        }else{
+            return 0;
+        }
+    }
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void draw(){
+        do Screen.setColor(true);
+        do Screen.drawCircle(x,y,radius);
+        return;
+    }
+
+    method int move(int ad,int bd){
+        var int flag;
+        var boolean pos,posx;
+        let flag=0;
+
+        do Screen.setColor(false);
+        do Screen.drawCircle(x,y,radius);
+
+        if(( y < (22+radius)) | (y >(238-radius-direction[1]))){
+            let direction[1]=0-direction[1];
+        }
+        if (direction[1] >0){
+            let pos=true;
+        }else{
+            let pos=false;
+        }
+
+        // If ball is out from left side:
+        if( x < (22+radius)){
+           // if(((y-radius)<ay[1]) & ((y+radius)>ay[0])){
+                let direction[0]=0-direction[0];
+                let flag =1;
+           // }
+            //else{
+              //  return -1;
+            //}
+        }
+
+        // If ball is out from right side:
+        if( x > (492-radius)){
+           //  if(((y-radius)<by[1]) & ((y+radius)>by[0])){
+                let direction[0]=0-direction[0];  
+                let flag =-1;
+           // }
+            //else{
+             //   return 1;
+           // }
+        }
+
+        if (direction[0] >0){
+            let posx=true;
+        }else{
+            let posx=false;
+        }
+        if(flag = -1){
+            let direction[1]=direction[1]+2;
+            if(ad>0){
+                let direction[1]=direction[1]+1;
+                let direction[0]=direction[0]+1;
+            }
+            if(ad<0){
+                let direction[1]=direction[1]-1;
+                let direction[0]=direction[1]-1;
+            }
+        }
+        if(flag = 1){
+            let direction[1]=direction[1]+2;
+            if(bd > 0){
+                let direction[1]=direction[1]+1;
+                let direction[0]=direction[0]+1;
+                
+            }
+            if(bd<0){
+                let direction[1]=direction[1]-1;
+                let direction[0]=direction[1]-1;
+            }
+        }
+        if(pos){
+            if(direction[1]>13){
+               let direction[1]=13;
+            }
+            if(direction[1]<2){
+               let direction[1]=2;
+            }
+        }else{
+            if(direction[1]<-13){
+               let direction[1]=-13;
+            }
+            if(direction[1]>-2){
+               let direction[1]=-2;
+            }
+        }
+        if(posx){
+            if(direction[0]>6){
+               let direction[0]=6;
+            }
+            if(direction[0]<2){
+               let direction[0]=2;
+            }
+        }else{
+            if(direction[0]<-6){
+               let direction[0]=-6;
+            }
+            if(direction[0]>-2){
+               let direction[0]=-2;
+            }
+        }
+        let x=x+direction[0];
+        let y=y+direction[1];
+        do Screen.setColor(true);
+        do Screen.drawCircle(x,y,radius);
+        //do ay.dispose();
+        //do by.dispose();
+        return 0;
+    }
+}

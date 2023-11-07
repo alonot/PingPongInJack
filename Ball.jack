@@ -80,7 +80,7 @@ class Ball{
         if(flag = -1){
             let direction[1]=direction[1]+2;
             if(ad>0){
-                let direction[1]=direction[1]+1;
+                let direction[1]=direction[1]-1;
                 let direction[0]=direction[0]+1;
             }
             if(ad<0){
@@ -91,7 +91,7 @@ class Ball{
         if(flag = 1){
             let direction[1]=direction[1]+2;
             if(bd > 0){
-                let direction[1]=direction[1]+1;
+                let direction[1]=direction[1]-1;
                 let direction[0]=direction[0]+1;
                 
             }

@@ -26,6 +26,9 @@ class Gamerun {
         return;
     }
 
+    method int moveBall(){
+        
+    }
 
 
     method void dispose(){
@@ -40,7 +43,7 @@ class Gamerun {
         if (direction = 1){do s2.moveup();}
         if (direction = 2){do s2.movedown();}
         do Sys.wait(5);
-        return ;
+        return ;                                                                                                                                    
     }
 
     method void run(){
@@ -52,7 +55,7 @@ class Gamerun {
             while(key = 0){
                 let key = Keyboard.keyPressed();
                 do moveslider2();
-                
+
             }
             if (key = 81)  { let exit = true; } 
             if (key = 131) { let direction = 1; }  

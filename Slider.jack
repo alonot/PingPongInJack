@@ -1,13 +1,14 @@
 class Slider {
-    field int x,y,len,wid;
+    field int x,y,len,wid,speed;
 
 
 
-    constructor Slider new(int ax, int ay, int l, int w){
+    constructor Slider new(int ax, int ay, int l, int w,int Asp){
         let x = ax;
         let y = ay;
         let len = l;
         let wid = w;
+        let speed=Asp;
         do draw();
         return this;
     }
@@ -30,8 +31,8 @@ class Slider {
     method void moveup(){
         if (y>17){
             do Screen.setColor(false);
-            do Screen.drawRectangle(x,(y+len)-2,x+wid,y+len);
-            let y = y-2;
+            do Screen.drawRectangle(x,(y+len)-speed,x+wid,y+len);
+            let y = y-speed;
             do Screen.setColor(true);
             do Screen.drawRectangle(x,y,x+wid,y+len);
         }
@@ -41,8 +42,8 @@ class Slider {
     method void movedown(){
         if ((y+len)<238){
             do Screen.setColor(false);
-            do Screen.drawRectangle(x,y,x+wid,y+2);
-            let y = y+2;
+            do Screen.drawRectangle(x,y,x+wid,y+speed);
+            let y = y+speed;
             do Screen.setColor(true);
             do Screen.drawRectangle(x,y,x+wid,y+len);
         }

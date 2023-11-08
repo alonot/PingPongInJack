@@ -63,6 +63,7 @@ class Ball{
             if((y>100) & (y<150)){
                 let direction[0]=direction[0]-1;
             }
+            
         }else{
             let direction[0]=direction[0]+1; 
             if((y>100) & (y<150)){
@@ -73,10 +74,12 @@ class Ball{
     }
 
     /** gives new velocity to the ball */
-    method int computeVelocity(int ad,Array ay,Array by){
+    method int computeVelocity(int leftx,int rightx,int velocitySLeft,int velocitySRight,Array SLeftBounds,Array SRightBounds){
         var int flag;
         var boolean pos,posx;
         let flag=0;
+
+        do Output.moveCursor(22,45);
 
         // if collide with upper or lower wall -->
         if(( y < (22+radius)) | (y >(238-radius-direction[1]))){
@@ -89,8 +92,8 @@ class Ball{
         }
 
         // If ball is out from left side:
-        if( x < (20+radius)){
-           if(((y-radius-direction[1]-toleranceLevel)<ay[1]) & ((y+radius+direction[1]-toleranceLevel)>ay[0])){
+        if( (x < (leftx+radius)) & (direction[0] <0 )){
+           if(((y-radius-toleranceLevel)<SLeftBounds[1]) & ((y+radius+toleranceLevel)>SLeftBounds[0])){
                 let direction[0]=0-direction[0];
                 let flag =1;
            }
@@ -100,10 +103,11 @@ class Ball{
         }
 
         // If ball is out from right side:
-        if( x > (490-radius)){
-           if(((y-radius-direction[1]-toleranceLevel)<by[1]) & ((y+radius+direction[1]-toleranceLevel)>by[0])){
+        if(( x > (rightx-radius)) & (direction[0] >0 )){
+           if(((y-radius-toleranceLevel)<SRightBounds[1]) & ((y+radius+toleranceLevel)>SRightBounds[0])){
                 let direction[0]=0-direction[0];  
                 let flag =-1;
+                do Output.printInt(direction[0]);
             }
             else{
               return 1;
@@ -114,11 +118,12 @@ class Ball{
         }else{
             let posx=false;
         }
+                
         
         
         //If collide to player's slider -->
         if(flag = -1){
-            if(ad>0){
+            if(velocitySRight>0){
                 if(direction[1]>0){
                    do increaseVx(-1);
                 }else{
@@ -126,7 +131,7 @@ class Ball{
                 }
                 let direction[1]=direction[1]+1;
             }
-            if(ad<0){
+            if(velocitySRight<0){
                 if(direction[1]<0){
                    do increaseVx(-1);
                 }else{
@@ -137,8 +142,8 @@ class Ball{
         }
 
         // if collide to AI's slider -->
-        if(flag = 1){
-                   let direction[0]=direction[0]+2; 
+        if((flag = 1) & (~(velocitySLeft=0))){
+                   let direction[0]=direction[0]+1; 
                 if(direction[1]<0){
                    let direction[1]=direction[1]-1; 
                 }else{
@@ -186,15 +191,13 @@ class Ball{
     }
 
     /** Move the ball */
-    method int move(int ad,Array ay,Array by){
+    method int move(int a,int b,int bd,int ad,Array ay,Array by){
         var int result;
         do erase();
-        let result=computeVelocity(ad,ay,by);
+        let result=computeVelocity(a,b,bd,ad,ay,by);
         let x=x+direction[0];
         let y=y+direction[1];
         do draw();
-        do ay.dispose();
-        do by.dispose();
         return result;
     }
 }

@@ -1,7 +1,8 @@
 class Gamerun {
-    field Slider slider1,slider2;
+    field Slider slider1,slider2,surpriseSlider;
     field Ball ball;
     field int direction,scr_ai,scr_py,no_ball,directionAI;
+    field int surpriseCounter;
     
     /** initializer */
     constructor Gamerun new(){
@@ -11,6 +12,7 @@ class Gamerun {
         let ball= Ball.new(255,127,4);
         let direction = 0;
         let directionAI=0;
+        let surpriseCounter=0;
         let scr_ai =0;
         let scr_py =0;
         let no_ball=17;
@@ -28,10 +30,10 @@ class Gamerun {
         do Output.printString("No.ball . . . . .");
         do Output.moveCursor(22,0);
         do Output.printString("Score of AI: 0   ");
-        do Output.printString("Score of Player 2: 0");
+        do Output.printString("Score of Player: 0");
         return;
         // 22,14 AI
-        // 22, 37 Player
+        // 22, 35 Player
     }
 
     /** changes the score and  shows it to the screen */
@@ -39,7 +41,7 @@ class Gamerun {
         do Output.moveCursor(22,14);
         do Output.backSpace();
         do Output.printInt(scr_ai);
-        do Output.moveCursor(22,37);
+        do Output.moveCursor(22,35);
         do Output.backSpace();
         do Output.printInt(scr_py);
         do Output.moveCursor(0,no_ball);
@@ -53,10 +55,33 @@ class Gamerun {
     /** moves the ball and return result : whether ball is lost or collided */
     method int moveBall(){
         var Array a,b;
-        var int result;
+        var int result,randomy,temp;
         let a = slider1.ycordinate();
         let b = slider2.ycordinate();
-        let result = ball.move(21,487,directionAI,direction,a,b);
+        let result = ball.move(23,487,directionAI,direction,a,b);
+        
+        if (surpriseCounter > 500){
+            if(surpriseCounter =501){
+                let temp=((ball.gety()-((ball.gety()/10)*10)*12));
+                let randomy=127+(directionAI*temp);
+                if (randomy > 184){
+                    let randomy=184;
+                }
+                if(randomy < 71){
+                    let randomy=71;
+                }
+                let surpriseSlider=Slider.new(255,randomy,55,1,0);
+            }
+            if(surpriseCounter=1000){
+                let surpriseCounter=0;
+                do surpriseSlider.dispose();
+            }else{
+                let a= surpriseSlider.ycordinate();
+                do ball.handleBarrier(255,256,a);
+                do surpriseSlider.draw();
+            }
+        }
+        let surpriseCounter=surpriseCounter+1;
         do a.dispose();
         do b.dispose();
         return result;

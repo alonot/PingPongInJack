@@ -15,6 +15,11 @@ class Ball{
         return this;
     }
 
+    /** getter for y coordinate */
+    method int gety(){
+        return y;
+    }
+
     /** gives the Y velocity of the ball */
     method int getDirection(){
         if(x<490){
@@ -73,13 +78,29 @@ class Ball{
         return;
     }
 
+    method void handleBarrier(int barleftx,int barrightx,Array bary){
+        if(barleftx=0){
+            return;
+        }else{
+            if ((x > (barleftx-radius)) & (x < (barrightx)) & (direction[0]>0)){
+                if(((y-radius-toleranceLevel)<bary[1]) & ((y+radius+toleranceLevel)>bary[0])){
+                let direction[0]=0-direction[0];
+                }
+            }
+           if ((x < (barrightx+radius)) & (x > (barleftx)) & (direction[0]<0)){
+                if(((y-radius-toleranceLevel)<bary[1]) & ((y+radius+toleranceLevel)>bary[0])){
+                let direction[0]=0-direction[0];
+                }
+            }
+            return;
+        }
+    }
+
     /** gives new velocity to the ball */
     method int computeVelocity(int leftx,int rightx,int velocitySLeft,int velocitySRight,Array SLeftBounds,Array SRightBounds){
         var int flag;
         var boolean pos,posx;
         let flag=0;
-
-        do Output.moveCursor(22,45);
 
         // if collide with upper or lower wall -->
         if(( y < (22+radius)) | (y >(238-radius-direction[1]))){
@@ -107,7 +128,6 @@ class Ball{
            if(((y-radius-toleranceLevel)<SRightBounds[1]) & ((y+radius+toleranceLevel)>SRightBounds[0])){
                 let direction[0]=0-direction[0];  
                 let flag =-1;
-                do Output.printInt(direction[0]);
             }
             else{
               return 1;

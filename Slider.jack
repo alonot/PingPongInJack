@@ -51,6 +51,9 @@ class Slider {
     }
 
     method void dispose(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x,y,x+wid,y+len);
+
         do Memory.deAlloc(this);
         return;
     }

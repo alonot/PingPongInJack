@@ -1,14 +1,14 @@
 class Gamerun {
     field Slider slider1,slider2;
     field Ball ball;
-    field int direction,int scr_ai,scr_py,no_ball;
+    field int direction,scr_ai,scr_py,no_ball;
     
 
     constructor Gamerun new(){
         do Gui();
-        let slider1 = Slider.new(20,95,45,8);
-        let slider2 = Slider.new(481,95,45,8);
-        let ball= Ball.new(127,127,4);
+        let slider1 = Slider.new(17,95,45,8);
+        let slider2 = Slider.new(487,95,45,8);
+        let ball= Ball.new(255,127,4);
         let direction = 0;
         let scr_ai =0;
         let scr_py =0;
@@ -91,8 +91,15 @@ class Gamerun {
                         let scr_py=scr_py+1;
                     }
                     do score();
+                    do ball.reset();
+                    while(~(key=32)){
+                        let key = Keyboard.keyPressed();
+                        if(no_ball<8){
+                            let key=32;
+                        }
+                    }
                 }
-                if(no_ball<=7){
+                if(no_ball<8){
                     let exit=true;
                     let key=100;
                 }
@@ -101,7 +108,7 @@ class Gamerun {
             if (key = 131) { let direction = 1; }  
             if (key = 133) { let direction = 2; }  
             let key=0;
-            if(no_ball<=7){
+            if(no_ball<8){
                 let exit=true;
                 let key=100;
             }

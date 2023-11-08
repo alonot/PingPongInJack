@@ -42,13 +42,16 @@ class Ball{
         return;
     }
 
-    method int move(int ad,Array ay,Array by){
+    method void erase(){
+        do Screen.setColor(false);
+        do Screen.drawCircle(x,y,radius);
+        return;
+    }
+
+    method int computeVelocity(int ad,Array ay,Array by){
         var int flag;
         var boolean pos,posx;
         let flag=0;
-
-        do Screen.setColor(false);
-        do Screen.drawCircle(x,y,radius);
 
         if(( y < (22+radius)) | (y >(238-radius-direction[1]))){
             let direction[1]=0-direction[1];
@@ -136,12 +139,21 @@ class Ball{
                let direction[0]=-1;
             }
         }
+        return 0;
+    }
+
+    method int move(int ad,Array ay,Array by){
+        var int result;
+        do erase();
+        let result=computeVelocity(ad,ay,by);
+
         let x=x+direction[0];
         let y=y+direction[1];
-        do Screen.setColor(true);
-        do Screen.drawCircle(x,y,radius);
+        if(result=0){
+        do draw();
+        }
         do ay.dispose();
         do by.dispose();
-        return 0;
+        return result;
     }
 }

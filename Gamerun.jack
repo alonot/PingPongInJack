@@ -1,7 +1,8 @@
 class Gamerun {
     field Slider slider1,slider2;
     field Ball ball;
-    field int direction;
+    field int direction,int scr_ai,scr_py,no_ball;
+    
 
     constructor Gamerun new(){
         do Gui();
@@ -9,6 +10,9 @@ class Gamerun {
         let slider2 = Slider.new(481,95,45,8);
         let ball= Ball.new(127,127,4);
         let direction = 0;
+        let scr_ai =0;
+        let scr_py =0;
+        let no_ball=17;
         
         return this;
     }
@@ -21,10 +25,11 @@ class Gamerun {
         do Screen.drawLine(15,15,15,240);
         do Output.printString("No.ball . . . . .");
         do Output.moveCursor(22,0);
-        do Output.printString("Score of Player 1    ");
-        do Output.printString("Score of Player 2");
-        do Output.moveCursor(0,18);
+        do Output.printString("Score of AI: 0   ");
+        do Output.printString("Score of Player 2: 0");
         return;
+        // 22,14 AI
+        // 22, 37 Player
     }
 
     method int moveBall(){
@@ -89,4 +94,22 @@ class Gamerun {
          }
          return;
     }
+    method void score(){
+        do Output.moveCursor(22,14);
+        do Output.backSpace();
+        do Output.printInt(scr_ai);
+        do Output.moveCursor(22,37);
+        do Output.backSpace();
+        do Output.printInt(scr_py);
+        do Output.moveCursor(0,no_ball);
+        do Output.backSpace();
+        do Output.backSpace();
+        let no_ball = no_ball-2;
+        return;
+
+
+        
+    }
+
+     
 }

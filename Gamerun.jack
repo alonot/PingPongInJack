@@ -7,7 +7,7 @@ class Gamerun {
     constructor Gamerun new(){
         do Gui();
         let slider1 = Slider.new(17,95,45,8);
-        let slider2 = Slider.new(487,95,45,8);
+        let slider2 = Slider.new(486,95,45,8);
         let ball= Ball.new(255,127,4);
         let direction = 0;
         let scr_ai =0;
@@ -45,12 +45,15 @@ class Gamerun {
 
     method void ai(){
         var int dir;
+        var Array ySlider;
         let dir = ball.getDirection();
-        if (dir < 0){
-            do slider1.moveup();
-        }
-        if (dir>0){
-            do slider1.movedown();
+        if(~(dir=0)){
+            let ySlider=slider1.ycordinate();
+            if(ySlider[0]>dir){
+                do slider1.moveup();
+            }else{
+                do slider1.movedown();
+            }
         }
         return;
     }
@@ -99,6 +102,8 @@ class Gamerun {
                         }
                     }
                 }
+                do slider1.draw();
+                do slider2.draw();
                 if(no_ball<8){
                     let exit=true;
                     let key=100;

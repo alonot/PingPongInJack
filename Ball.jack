@@ -15,7 +15,7 @@ class Ball{
 
     method int getDirection(){
         if(x<450){
-        return direction[1];
+        return y;
         }else{
             return 0;
         }
@@ -60,7 +60,7 @@ class Ball{
         }
 
         // If ball is out from left side:
-        if( x < (17+radius)){
+        if( x < (18+radius)){
            if(((y-radius)<ay[1]) & ((y+radius)>ay[0])){
                 let direction[0]=0-direction[0];
                 let flag =1;
@@ -71,7 +71,7 @@ class Ball{
         }
 
         // If ball is out from right side:
-        if( x > (487-radius)){
+        if( x > (492-radius)){
            if(((y-radius)<by[1]) & ((y+radius)>by[0])){
                 let direction[0]=0-direction[0];  
                 let flag =-1;

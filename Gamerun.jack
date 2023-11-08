@@ -3,11 +3,11 @@ class Gamerun {
     field Ball ball;
     field int direction,scr_ai,scr_py,no_ball;
     
-
+    /** initializer */
     constructor Gamerun new(){
         do Gui();
         let slider1 = Slider.new(17,95,45,8);
-        let slider2 = Slider.new(487,95,45,8);
+        let slider2 = Slider.new(486,95,45,8);
         let ball= Ball.new(255,127,4);
         let direction = 0;
         let scr_ai =0;
@@ -17,6 +17,7 @@ class Gamerun {
         return this;
     }
 
+    /** Draws the gui to the screen */
     method void Gui() {
         do Screen.setColor(true);
         do Screen.drawLine(15,15,496,15);
@@ -32,6 +33,23 @@ class Gamerun {
         // 22, 37 Player
     }
 
+    /** changes the score and  shows it to the screen */
+    method void score(){
+        do Output.moveCursor(22,14);
+        do Output.backSpace();
+        do Output.printInt(scr_ai);
+        do Output.moveCursor(22,37);
+        do Output.backSpace();
+        do Output.printInt(scr_py);
+        do Output.moveCursor(0,no_ball);
+        do Output.backSpace();
+        do Output.backSpace();
+        let no_ball = no_ball-2;
+        return;
+        
+    }
+
+    /** moves the ball and return result : whether ball is lost or collided */
     method int moveBall(){
         var Array a,b;
         var int result;
@@ -43,27 +61,27 @@ class Gamerun {
         return result;
     }
 
-    method void ai(){
+    /** moves ai */
+    method void Moveai(){
         var int dir;
         let dir = ball.getDirection();
-        if (dir < 0){
+        if(dir < 0){
             do slider1.moveup();
         }
-        if (dir>0){
+        if(dir >0){
             do slider1.movedown();
         }
         return;
     }
 
-
+    /** deAlloc the memory */
     method void dispose(){
         do slider1.dispose();
         do slider2.dispose();
         return;
     }
 
-   
-
+    /** moves the slider of player */
     method void moveslider2(){
         if (direction = -1){do slider2.moveup();}
         if (direction = 1){do slider2.movedown();}
@@ -71,7 +89,7 @@ class Gamerun {
         return ;
     }
 
-
+    /** Main function which starts and ends the game */
     method void run(){
         var char key;
         var int result;
@@ -82,8 +100,10 @@ class Gamerun {
             while(key = 0){
                 let key = Keyboard.keyPressed();
                 do moveslider2();
-                do ai();
+                do Moveai();
                 let result= moveBall();
+                do slider1.draw();
+                do slider2.draw();
                 if(~(result=0)){
                     if(result=1){
                         let scr_ai=scr_ai+1;
@@ -91,7 +111,6 @@ class Gamerun {
                         let scr_py=scr_py+1;
                     }
                     do score();
-                    do ball.reset();
                     let direction=0;
                     while(~(key=32)){
                         let key = Keyboard.keyPressed();
@@ -99,6 +118,7 @@ class Gamerun {
                             let key=32;
                         }
                     }
+                    do ball.reset();
                 }
                 if(no_ball<8){
                     let exit=true;
@@ -117,22 +137,6 @@ class Gamerun {
          }
          return;
     }
-    method void score(){
-        do Output.moveCursor(22,14);
-        do Output.backSpace();
-        do Output.printInt(scr_ai);
-        do Output.moveCursor(22,37);
-        do Output.backSpace();
-        do Output.printInt(scr_py);
-        do Output.moveCursor(0,no_ball);
-        do Output.backSpace();
-        do Output.backSpace();
-        let no_ball = no_ball-2;
-        return;
-
-
-        
-    }
-
-     
+    
+    
 }

@@ -47,13 +47,11 @@ class Gamerun {
         var int dir;
         var Array ySlider;
         let dir = ball.getDirection();
-        if(~(dir=0)){
-            let ySlider=slider1.ycordinate();
-            if(ySlider[0]>dir){
-                do slider1.moveup();
-            }else{
-                do slider1.movedown();
-            }
+        if(dir < 0){
+            do slider1.moveup();
+        }
+        if(dir >0){
+            do slider1.movedown();
         }
         return;
     }
@@ -68,8 +66,8 @@ class Gamerun {
    
 
     method void moveslider2(){
-        if (direction = 1){do slider2.moveup();}
-        if (direction = 2){do slider2.movedown();}
+        if (direction = -1){do slider2.moveup();}
+        if (direction = 1){do slider2.movedown();}
         do Sys.wait(9);
         return ;
     }
@@ -95,6 +93,7 @@ class Gamerun {
                     }
                     do score();
                     do ball.reset();
+                    let direction=0;
                     while(~(key=32)){
                         let key = Keyboard.keyPressed();
                         if(no_ball<8){
@@ -110,8 +109,8 @@ class Gamerun {
                 }
             }
             if (key = 81)  { let exit = true; } 
-            if (key = 131) { let direction = 1; }  
-            if (key = 133) { let direction = 2; }  
+            if (key = 131) { let direction = -1; }  
+            if (key = 133) { let direction = 1; }  
             let key=0;
             if(no_ball<8){
                 let exit=true;

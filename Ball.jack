@@ -14,8 +14,8 @@ class Ball{
     }
 
     method int getDirection(){
-        if(x<450){
-        return y;
+        if(x<490){
+        return direction[1];
         }else{
             return 0;
         }
@@ -90,24 +90,29 @@ class Ball{
         }
         if(flag = -1){
             if(ad>0){
+                if(direction[1]>0){
+                   let direction[0]=direction[0]-1; 
+                }else{
+                    let direction[0]=direction[0]+1;
+                }
                 let direction[1]=direction[1]+1;
-                let direction[0]=direction[0]-1;
             }
             if(ad<0){
+                if(direction[1]<0){
+                   let direction[0]=direction[0]-1; 
+                }else{
+                    let direction[0]=direction[0]+1;
+                }
                 let direction[1]=direction[1]-1;
-                let direction[0]=direction[1]+1;
             }
         }
         if(flag = 1){
-            if(direction[1] > 0){
-                let direction[1]=direction[1]+1;
-                let direction[0]=direction[0]+1;
-                
-            }
-            if(direction[1]<0){
-                let direction[1]=direction[1]-1;
-                let direction[0]=direction[1]-1;
-            }
+                   let direction[0]=direction[0]+1; 
+                if(direction[1]<0){
+                   let direction[1]=direction[1]-1; 
+                }else{
+                    let direction[1]=direction[1]+1;
+                }
         }
         if(pos){
             if(direction[1]>4){
@@ -146,7 +151,6 @@ class Ball{
         var int result;
         do erase();
         let result=computeVelocity(ad,ay,by);
-
         let x=x+direction[0];
         let y=y+direction[1];
         if(result=0){

@@ -63,7 +63,7 @@ class Ball{
         }
 
         // If ball is out from left side:
-        if( x < (18+radius)){
+        if( x < (17+radius)){
            if(((y-radius)<ay[1]) & ((y+radius)>ay[0])){
                 let direction[0]=0-direction[0];
                 let flag =1;
@@ -74,7 +74,7 @@ class Ball{
         }
 
         // If ball is out from right side:
-        if( x > (492-radius)){
+        if( x > (487-radius)){
            if(((y-radius)<by[1]) & ((y+radius)>by[0])){
                 let direction[0]=0-direction[0];  
                 let flag =-1;

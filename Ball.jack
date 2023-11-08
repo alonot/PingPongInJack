@@ -89,7 +89,7 @@ class Ball{
         }
 
         // If ball is out from left side:
-        if( x < (20+radius)){
+        if( (x < (20+radius)) & (direction[0] < 0)){
            if(((y-radius-direction[1]-toleranceLevel)<ay[1]) & ((y+radius+direction[1]-toleranceLevel)>ay[0])){
                 let direction[0]=0-direction[0];
                 let flag =1;
@@ -100,7 +100,7 @@ class Ball{
         }
 
         // If ball is out from right side:
-        if( x > (490-radius)){
+        if( (x > (490-radius)) & (direction[0]>0)){
            if(((y-radius-direction[1]-toleranceLevel)<by[1]) & ((y+radius+direction[1]-toleranceLevel)>by[0])){
                 let direction[0]=0-direction[0];  
                 let flag =-1;
